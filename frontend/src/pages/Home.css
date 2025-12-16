@@ -1,10 +1,30 @@
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 80px 0;
-  min-height: 70vh;
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--medical-blue-50) 100%);
+  padding: var(--space-20) 0;
+  min-height: 75vh;
   display: flex;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(45deg, var(--blood-red-100) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+  50% { transform: scale(1.1) rotate(5deg); opacity: 0.2; }
 }
 
 .hero-content {
@@ -15,15 +35,35 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: var(--text-5xl);
+  font-weight: var(--font-extrabold);
+  line-height: var(--leading-tight);
   color: var(--gray-900);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
+  background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .highlight {
-  color: var(--blood-red);
+  background: linear-gradient(135deg, var(--blood-red-500) 0%, var(--blood-red-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blood-red-500) 0%, var(--blood-red-400) 100%);
+  border-radius: 2px;
+  opacity: 0.6;
 }
 
 .hero-subtitle {
@@ -45,20 +85,36 @@
 }
 
 .blood-drop-large {
-  width: 200px;
-  height: 200px;
-  background: var(--white);
+  width: 240px;
+  height: 240px;
+  background: linear-gradient(135deg, var(--white) 0%, var(--blood-red-50) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 20px 40px var(--shadow-medium);
+  box-shadow: 
+    0 20px 40px rgba(220, 38, 38, 0.1),
+    0 0 0 1px var(--blood-red-100),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   animation: float 3s ease-in-out infinite;
+  position: relative;
+}
+
+.blood-drop-large::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(10px);
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
 }
 
 /* Features Section */
@@ -83,33 +139,63 @@
 
 .feature-card {
   text-align: center;
-  padding: 40px 24px;
-  border-radius: 16px;
+  padding: var(--space-10) var(--space-6);
+  border-radius: var(--radius-2xl);
   background: var(--white);
   border: 1px solid var(--gray-200);
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blood-red-500) 0%, var(--medical-blue-500) 50%, var(--life-green-500) 100%);
+  transform: translateX(-100%);
+  transition: transform var(--transition-base);
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border-color: var(--blood-red);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--gray-300);
+}
+
+.feature-card:hover::before {
+  transform: translateX(0);
 }
 
 .feature-icon {
   width: 80px;
   height: 80px;
-  background: var(--gray-100);
+  background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-50) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 24px;
-  transition: background-color 0.3s ease;
+  margin: 0 auto var(--space-6);
+  transition: all var(--transition-base);
+  position: relative;
 }
 
-.feature-card:hover .feature-icon {
-  background: var(--blood-light-red);
+.feature-card:nth-child(1):hover .feature-icon {
+  background: linear-gradient(135deg, var(--blood-red-100) 0%, var(--blood-red-50) 100%);
+  transform: scale(1.1);
+}
+
+.feature-card:nth-child(2):hover .feature-icon {
+  background: linear-gradient(135deg, var(--medical-blue-100) 0%, var(--medical-blue-50) 100%);
+  transform: scale(1.1);
+}
+
+.feature-card:nth-child(3):hover .feature-icon {
+  background: linear-gradient(135deg, var(--life-green-100) 0%, var(--life-green-50) 100%);
+  transform: scale(1.1);
 }
 
 .feature-card h3 {
@@ -164,9 +250,12 @@
 
 .stat-number {
   display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--blood-red);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-extrabold);
+  background: linear-gradient(135deg, var(--blood-red-500) 0%, var(--blood-red-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .stat-label {

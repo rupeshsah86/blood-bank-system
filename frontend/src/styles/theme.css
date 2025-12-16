@@ -79,14 +79,63 @@
   --white: #ffffff;
   --black: #000000;
 
-  /* Blood Management Theme Colors */
-  --blood-red: var(--primary-600);
-  --blood-dark-red: var(--primary-700);
-  --blood-light-red: var(--primary-100);
-  --medical-blue: var(--secondary-600);
-  --medical-light-blue: var(--secondary-100);
-  --life-green: var(--success-600);
-  --life-light-green: var(--success-100);
-  --warning-orange: var(--warning-600);
-  --warning-light-orange: var(--warning-100);
+  /* Blood Management Theme Colors - Enhanced */
+  /* 🔴 Primary Blood Red - Actions, highlights, CTAs */
+  --blood-red-50: #fef2f2;
+  --blood-red-100: #fee2e2;
+  --blood-red-200: #fecaca;
+  --blood-red-300: #fca5a5;
+  --blood-red-400: #f87171;
+  --blood-red-500: #dc2626;  /* Main blood red */
+  --blood-red-600: #b91c1c;
+  --blood-red-700: #991b1b;
+  --blood-red-800: #7f1d1d;
+  --blood-red-900: #450a0a;
+
+  /* 🔵 Medical Blue - Navigation, secondary buttons */
+  --medical-blue-50: #eff6ff;
+  --medical-blue-100: #dbeafe;
+  --medical-blue-200: #bfdbfe;
+  --medical-blue-300: #93c5fd;
+  --medical-blue-400: #60a5fa;
+  --medical-blue-500: #2563eb;  /* Main medical blue */
+  --medical-blue-600: #1d4ed8;
+  --medical-blue-700: #1e40af;
+  --medical-blue-800: #1e3a8a;
+  --medical-blue-900: #172554;
+
+  /* 🟢 Life Green - Success states, available stock */
+  --life-green-50: #ecfdf5;
+  --life-green-100: #d1fae5;
+  --life-green-200: #a7f3d0;
+  --life-green-300: #6ee7b7;
+  --life-green-400: #34d399;
+  --life-green-500: #059669;  /* Main life green */
+  --life-green-600: #047857;
+  --life-green-700: #065f46;
+  --life-green-800: #064e3b;
+  --life-green-900: #022c22;
+
+  /* 🟠 Warning Orange - Alerts, low stock */
+  --warning-orange-50: #fffbeb;
+  --warning-orange-100: #fef3c7;
+  --warning-orange-200: #fde68a;
+  --warning-orange-300: #fcd34d;
+  --warning-orange-400: #fbbf24;
+  --warning-orange-500: #d97706;  /* Main warning orange */
+  --warning-orange-600: #b45309;
+  --warning-orange-700: #92400e;
+  --warning-orange-800: #78350f;
+  --warning-orange-900: #451a03;
+
+  /* Legacy aliases for backward compatibility */
+  --blood-red: var(--blood-red-500);
+  --blood-dark-red: var(--blood-red-600);
+  --blood-light-red: var(--blood-red-100);
+  --medical-blue: var(--medical-blue-500);
+  --medical-light-blue: var(--medical-blue-100);
+  --life-green: var(--life-green-500);
+  --life-light-green: var(--life-green-100);
+  --warning-orange: var(--warning-orange-500);
+  --warning-light-orange: var(--warning-orange-100);
 }

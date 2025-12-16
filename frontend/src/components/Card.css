@@ -26,8 +26,60 @@
 }
 
 .card-warning {
-  background: var(--warning-50);
-  border-color: var(--warning-200);
+  background: linear-gradient(135deg, var(--warning-orange-50) 0%, var(--white) 100%);
+  border-color: var(--warning-orange-200);
+}
+
+/* Medical themed card variants */
+.card-blood {
+  background: linear-gradient(135deg, var(--blood-red-50) 0%, var(--white) 100%);
+  border: 2px solid var(--blood-red-200);
+  position: relative;
+}
+
+.card-blood::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blood-red-500) 0%, var(--blood-red-400) 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+.card-medical {
+  background: linear-gradient(135deg, var(--medical-blue-50) 0%, var(--white) 100%);
+  border: 2px solid var(--medical-blue-200);
+  position: relative;
+}
+
+.card-medical::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--medical-blue-500) 0%, var(--medical-blue-400) 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+.card-donor {
+  background: linear-gradient(135deg, var(--life-green-50) 0%, var(--white) 100%);
+  border: 2px solid var(--life-green-200);
+  position: relative;
+}
+
+.card-donor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--life-green-500) 0%, var(--life-green-400) 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
 /* Padding */

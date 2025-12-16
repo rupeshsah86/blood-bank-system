@@ -1,0 +1,190 @@
+/* === MEDICAL THEME UTILITY CLASSES === */
+
+/* Text Colors */
+.text-blood-red { color: var(--blood-red-500); }
+.text-medical-blue { color: var(--medical-blue-500); }
+.text-life-green { color: var(--life-green-500); }
+.text-warning-orange { color: var(--warning-orange-500); }
+
+/* Background Colors */
+.bg-blood-red { background-color: var(--blood-red-500); }
+.bg-medical-blue { background-color: var(--medical-blue-500); }
+.bg-life-green { background-color: var(--life-green-500); }
+.bg-warning-orange { background-color: var(--warning-orange-500); }
+
+/* Light Background Colors */
+.bg-blood-red-light { background-color: var(--blood-red-50); }
+.bg-medical-blue-light { background-color: var(--medical-blue-50); }
+.bg-life-green-light { background-color: var(--life-green-50); }
+.bg-warning-orange-light { background-color: var(--warning-orange-50); }
+
+/* Gradient Backgrounds */
+.bg-gradient-blood {
+  background: linear-gradient(135deg, var(--blood-red-500) 0%, var(--blood-red-600) 100%);
+}
+
+.bg-gradient-medical {
+  background: linear-gradient(135deg, var(--medical-blue-500) 0%, var(--medical-blue-600) 100%);
+}
+
+.bg-gradient-life {
+  background: linear-gradient(135deg, var(--life-green-500) 0%, var(--life-green-600) 100%);
+}
+
+.bg-gradient-hero {
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--medical-blue-50) 100%);
+}
+
+/* Border Colors */
+.border-blood-red { border-color: var(--blood-red-500); }
+.border-medical-blue { border-color: var(--medical-blue-500); }
+.border-life-green { border-color: var(--life-green-500); }
+.border-warning-orange { border-color: var(--warning-orange-500); }
+
+/* Medical Icons */
+.icon-blood-drop {
+  color: var(--blood-red-500);
+  filter: drop-shadow(0 2px 4px rgba(220, 38, 38, 0.2));
+}
+
+.icon-medical {
+  color: var(--medical-blue-500);
+  filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.2));
+}
+
+.icon-life {
+  color: var(--life-green-500);
+  filter: drop-shadow(0 2px 4px rgba(5, 150, 105, 0.2));
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Medical Status Indicators */
+.status-available {
+  position: relative;
+}
+
+.status-available::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--life-green-500);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  animation: pulse-dot 2s infinite;
+}
+
+.status-urgent {
+  position: relative;
+}
+
+.status-urgent::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--blood-red-500);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  animation: pulse-dot 1s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
+}
+
+/* Medical Card Layouts */
+.medical-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.medical-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.medical-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.medical-grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Blood Type Styling */
+.blood-type-A { color: var(--blood-red-600); }
+.blood-type-B { color: var(--medical-blue-600); }
+.blood-type-AB { color: var(--warning-orange-600); }
+.blood-type-O { color: var(--life-green-600); }
+
+/* Medical Animations */
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.float-medical {
+  animation: float-medical 3s ease-in-out infinite;
+}
+
+@keyframes float-medical {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .medical-grid-2,
+  .medical-grid-3,
+  .medical-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

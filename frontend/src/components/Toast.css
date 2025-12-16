@@ -5,32 +5,43 @@
   padding: var(--space-4);
   background: var(--white);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-xl);
   border-left: 4px solid;
   min-width: 320px;
   max-width: 480px;
   position: relative;
   z-index: var(--z-toast);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+
+.toast:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2xl);
 }
 
 .toast-success {
-  border-left-color: var(--success-500);
-  background: var(--success-50);
+  border-left-color: var(--life-green-500);
+  background: linear-gradient(135deg, var(--life-green-50) 0%, var(--white) 100%);
+  border: 1px solid var(--life-green-200);
 }
 
 .toast-error {
-  border-left-color: var(--danger-500);
-  background: var(--danger-50);
+  border-left-color: var(--blood-red-500);
+  background: linear-gradient(135deg, var(--blood-red-50) 0%, var(--white) 100%);
+  border: 1px solid var(--blood-red-200);
 }
 
 .toast-warning {
-  border-left-color: var(--warning-500);
-  background: var(--warning-50);
+  border-left-color: var(--warning-orange-500);
+  background: linear-gradient(135deg, var(--warning-orange-50) 0%, var(--white) 100%);
+  border: 1px solid var(--warning-orange-200);
 }
 
 .toast-info {
-  border-left-color: var(--secondary-500);
-  background: var(--secondary-50);
+  border-left-color: var(--medical-blue-500);
+  background: linear-gradient(135deg, var(--medical-blue-50) 0%, var(--white) 100%);
+  border: 1px solid var(--medical-blue-200);
 }
 
 .toast-icon {
@@ -44,23 +55,27 @@
 }
 
 .toast-success .toast-icon {
-  background: var(--success-100);
-  color: var(--success-600);
+  background: linear-gradient(135deg, var(--life-green-100) 0%, var(--life-green-200) 100%);
+  color: var(--life-green-700);
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.2);
 }
 
 .toast-error .toast-icon {
-  background: var(--danger-100);
-  color: var(--danger-600);
+  background: linear-gradient(135deg, var(--blood-red-100) 0%, var(--blood-red-200) 100%);
+  color: var(--blood-red-700);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
 }
 
 .toast-warning .toast-icon {
-  background: var(--warning-100);
-  color: var(--warning-600);
+  background: linear-gradient(135deg, var(--warning-orange-100) 0%, var(--warning-orange-200) 100%);
+  color: var(--warning-orange-700);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
 }
 
 .toast-info .toast-icon {
-  background: var(--secondary-100);
-  color: var(--secondary-600);
+  background: linear-gradient(135deg, var(--medical-blue-100) 0%, var(--medical-blue-200) 100%);
+  color: var(--medical-blue-700);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
 }
 
 .toast-content {
@@ -75,19 +90,19 @@
 }
 
 .toast-success .toast-content p {
-  color: var(--success-800);
+  color: var(--life-green-800);
 }
 
 .toast-error .toast-content p {
-  color: var(--danger-800);
+  color: var(--blood-red-800);
 }
 
 .toast-warning .toast-content p {
-  color: var(--warning-800);
+  color: var(--warning-orange-800);
 }
 
 .toast-info .toast-content p {
-  color: var(--secondary-800);
+  color: var(--medical-blue-800);
 }
 
 .toast-close {
