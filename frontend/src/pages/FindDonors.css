@@ -1,0 +1,310 @@
+.find-donors-page {
+  padding: 40px 0 80px;
+}
+
+.find-donors-hero {
+  text-align: center;
+  padding: 60px 0;
+  background: var(--gray-50);
+  border-radius: 16px;
+  margin-bottom: 60px;
+}
+
+.find-donors-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+}
+
+.find-donors-hero p {
+  font-size: 1.25rem;
+  color: var(--gray-600);
+}
+
+.search-section {
+  margin-bottom: 60px;
+}
+
+.search-card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+}
+
+.search-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 24px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.search-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-group label {
+  font-weight: 500;
+  color: var(--gray-700);
+  font-size: 0.875rem;
+}
+
+.search-group input,
+.search-group select {
+  padding: 12px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-group input:focus,
+.search-group select:focus {
+  outline: none;
+  border-color: var(--blood-red);
+  box-shadow: 0 0 0 3px var(--shadow-light);
+}
+
+.search-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+.compatibility-info {
+  background: var(--medical-light-blue);
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 4px solid var(--medical-blue);
+}
+
+.compatibility-info h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 16px;
+}
+
+.compatible-groups {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.blood-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.blood-badge.Apos,
+.blood-badge.Aneg {
+  background: var(--blood-red);
+}
+
+.blood-badge.Bpos,
+.blood-badge.Bneg {
+  background: var(--medical-blue);
+}
+
+.blood-badge.ABpos,
+.blood-badge.ABneg {
+  background: #7c3aed;
+}
+
+.blood-badge.Opos,
+.blood-badge.Oneg {
+  background: var(--life-green);
+}
+
+.results-section {
+  margin-bottom: 60px;
+}
+
+.results-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 24px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.no-results-icon {
+  margin-bottom: 16px;
+}
+
+.no-results h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+}
+
+.no-results p {
+  color: var(--gray-600);
+}
+
+.donors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.donor-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.donor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.donor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.donor-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.donor-info {
+  margin-bottom: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.contact-info {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.contact-info p {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-bottom: 4px;
+}
+
+.contact-info strong {
+  color: var(--gray-700);
+}
+
+.donor-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.emergency-section {
+  background: linear-gradient(135deg, var(--blood-red) 0%, var(--blood-dark-red) 100%);
+  border-radius: 16px;
+  padding: 2px;
+}
+
+.emergency-card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.emergency-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--blood-red);
+  margin-bottom: 16px;
+}
+
+.emergency-card p {
+  color: var(--gray-600);
+  margin-bottom: 24px;
+  font-size: 1.125rem;
+}
+
+.emergency-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .search-card {
+    padding: 24px;
+  }
+  
+  .search-actions {
+    flex-direction: column;
+  }
+  
+  .donors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .emergency-actions {
+    flex-direction: column;
+  }
+  
+  .compatible-groups {
+    justify-content: center;
+  }
+  
+  .find-donors-hero h1 {
+    font-size: 2rem;
+  }
+}
