@@ -70,8 +70,26 @@ const Dashboard = () => {
     <div className="dashboard">
       <div className="container">
         <div className="dashboard-header">
-          <h1>Welcome, {user?.name}</h1>
-          <p>Role: {user?.role?.charAt(0).toUpperCase() + user?.role?.slice(1)}</p>
+          <div className="header-content">
+            <div className="welcome-section">
+              <h1 className="welcome-title">
+                <span className="welcome-text">Welcome back,</span>
+                <span className="user-name">{user?.name}</span>
+                <span className="wave-emoji">👋</span>
+              </h1>
+              <div className="role-badge">
+                <span className="role-icon">
+                  {user?.role === 'admin' ? '👨‍⚕️' : user?.role === 'hospital' ? '🏥' : '🩸'}
+                </span>
+                <span className="role-text">{user?.role?.charAt(0).toUpperCase() + user?.role?.slice(1)}</span>
+              </div>
+            </div>
+            <div className="header-decoration">
+              <div className="floating-icon blood-drop">🩸</div>
+              <div className="floating-icon heart">❤️</div>
+              <div className="floating-icon medical">⚕️</div>
+            </div>
+          </div>
         </div>
 
         <div className="dashboard-tabs">
@@ -121,39 +139,51 @@ const Dashboard = () => {
           {activeTab === 'overview' && (
             <div className="overview">
               <div className="stats-grid">
-                <div className="stat-card">
+                <div className="stat-card donors-card">
                   <div className="stat-icon donors">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 7H16c-.8 0-1.54.37-2 1l-3.72 5.6L8.5 11.5C7.67 10.67 6.83 10 6 10s-1.67.67-2.5 1.5L2 13v7h2v-5.5l1.5-1.5L7 15.5V22h2v-7l2.72-2.72L14.5 16H18v6h2z"/>
-                    </svg>
+                    <div className="icon-bg">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 7H16c-.8 0-1.54.37-2 1l-3.72 5.6L8.5 11.5C7.67 10.67 6.83 10 6 10s-1.67.67-2.5 1.5L2 13v7h2v-5.5l1.5-1.5L7 15.5V22h2v-7l2.72-2.72L14.5 16H18v6h2z"/>
+                      </svg>
+                    </div>
+                    <div className="pulse-ring donors-pulse"></div>
                   </div>
                   <div className="stat-info">
-                    <h3>{stats.donors}</h3>
-                    <p>Total Donors</p>
+                    <h3 className="stat-number">{stats.donors}</h3>
+                    <p className="stat-label">Total Donors</p>
+                    <div className="stat-trend positive">↗ +12% this month</div>
                   </div>
                 </div>
                 
-                <div className="stat-card">
+                <div className="stat-card blood-card">
                   <div className="stat-icon blood">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
+                    <div className="icon-bg">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                      </svg>
+                    </div>
+                    <div className="pulse-ring blood-pulse"></div>
                   </div>
                   <div className="stat-info">
-                    <h3>{stats.bloodStock}</h3>
-                    <p>Blood Units</p>
+                    <h3 className="stat-number">{stats.bloodStock}</h3>
+                    <p className="stat-label">Blood Units</p>
+                    <div className="stat-trend neutral">→ Stable stock</div>
                   </div>
                 </div>
                 
-                <div className="stat-card">
+                <div className="stat-card requests-card">
                   <div className="stat-icon requests">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-                    </svg>
+                    <div className="icon-bg">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                      </svg>
+                    </div>
+                    <div className="pulse-ring requests-pulse"></div>
                   </div>
                   <div className="stat-info">
-                    <h3>{stats.requests}</h3>
-                    <p>Active Requests</p>
+                    <h3 className="stat-number">{stats.requests}</h3>
+                    <p className="stat-label">Active Requests</p>
+                    <div className="stat-trend urgent">⚡ 3 urgent</div>
                   </div>
                 </div>
               </div>

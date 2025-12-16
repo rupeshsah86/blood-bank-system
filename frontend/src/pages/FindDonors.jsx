@@ -69,11 +69,25 @@ const FindDonors = () => {
     <div className="find-donors-page">
       <div className="container">
         <section className="find-donors-hero">
-          <h1>Find Blood Donors</h1>
-          <p>Search for available blood donors in your area</p>
+          <div className="hero-content">
+            <h1 className="hero-title">
+              <span className="title-main">Find Life-Saving</span>
+              <span className="title-highlight">Blood Donors</span>
+              <div className="title-icons">
+                <span className="icon-pulse">🩸</span>
+                <span className="icon-pulse">🔍</span>
+                <span className="icon-pulse">🌍</span>
+              </div>
+            </h1>
+            <p className="hero-subtitle">
+              <span className="highlight-text">Connect with generous donors</span> in your community and 
+              help save lives through our advanced donor matching system.
+            </p>
+          </div>
         </section>
 
-        <div className="search-section">
+        <section className="search-section">
+          <h2 className="section-title">Advanced Donor Search</h2>
           <div className="search-card">
             <h2>Search Donors</h2>
             <div className="search-form">
@@ -149,7 +163,7 @@ const FindDonors = () => {
               </div>
             </div>
           )}
-        </div>
+        </section>
 
         {hasSearched && (
           <div className="results-section">

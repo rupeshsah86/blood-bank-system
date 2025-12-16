@@ -32,11 +32,17 @@ const Navbar = () => {
           {/* Left Side - Logo & Name */}
           <Link to="/" className="navbar-brand" aria-label="Blood Bank System - Go to homepage">
             <div className="logo">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--blood-red)" aria-hidden="true">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-              </svg>
+              <div className="logo-inner">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <div className="logo-pulse"></div>
+              </div>
             </div>
-            <span className="brand-name">Blood Bank System</span>
+            <div className="brand-text">
+              <span className="brand-name">Blood Bank</span>
+              <span className="brand-subtitle">Management System</span>
+            </div>
           </Link>
 
           {/* Center - Navigation Links */}

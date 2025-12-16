@@ -9,12 +9,31 @@ const Home = () => {
         <div className="container">
           <div className="hero-content">
             <h1 className="hero-title">
-              Blood Donation <span className="highlight">Saves Lives</span>
+              <span className="title-gradient">Blood Donation</span> <span className="highlight">Saves Lives</span>
+              <div className="title-decoration">
+                <span className="blood-drop-mini">🩸</span>
+                <span className="heart-beat">💖</span>
+                <span className="medical-cross">⚕️</span>
+              </div>
             </h1>
             <p className="hero-subtitle">
-              Connect donors with those in need. Manage blood inventory efficiently. 
-              Save lives through our comprehensive blood bank management system.
+              <span className="subtitle-highlight">Connect donors with those in need.</span> Manage blood inventory efficiently. 
+              Save lives through our comprehensive blood bank management system powered by modern technology.
             </p>
+            <div className="hero-stats">
+              <div className="stat-item">
+                <span className="stat-icon">🩸</span>
+                <span className="stat-text">10,000+ Lives Saved</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-icon">👥</span>
+                <span className="stat-text">5,000+ Active Donors</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-icon">🏥</span>
+                <span className="stat-text">50+ Partner Hospitals</span>
+              </div>
+            </div>
             <div className="hero-actions">
               <Link to="/register" className="btn btn-primary">
                 Become a Donor

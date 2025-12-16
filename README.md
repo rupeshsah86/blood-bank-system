@@ -26,6 +26,7 @@ A comprehensive full-stack web application for managing blood donations, donor r
 ## ✨ Features
 
 ### 🏥 Core Functionality
+
 - **Donor Management**: Registration, profile management, availability tracking
 - **Blood Inventory**: Real-time stock monitoring, expiry tracking, automated alerts
 - **Request Management**: Emergency requests, priority handling, status tracking
@@ -34,6 +35,7 @@ A comprehensive full-stack web application for managing blood donations, donor r
 - **Search & Filter**: Advanced donor search with blood compatibility
 
 ### 🎨 UI/UX Features
+
 - **Medical Theme**: Professional blood donation UI with consistent color palette
 - **Responsive Design**: Mobile-first approach, works on all devices
 - **Accessibility**: WCAG compliant, keyboard navigation, screen reader support
@@ -44,6 +46,7 @@ A comprehensive full-stack web application for managing blood donations, donor r
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **Framework**: React 18 with Vite
 - **Routing**: React Router v6
 - **State Management**: Context API + useReducer
@@ -53,6 +56,7 @@ A comprehensive full-stack web application for managing blood donations, donor r
 - **Package Manager**: npm
 
 ### Backend
+
 - **Runtime**: Node.js 18+
 - **Framework**: Express.js
 - **Database**: MongoDB with Mongoose ODM
@@ -62,6 +66,7 @@ A comprehensive full-stack web application for managing blood donations, donor r
 - **Environment**: dotenv
 
 ### DevOps & Tools
+
 - **Version Control**: Git with conventional commits
 - **Code Quality**: ESLint, Prettier
 - **Deployment**: Netlify (Frontend), Heroku/Railway (Backend)
@@ -70,6 +75,7 @@ A comprehensive full-stack web application for managing blood donations, donor r
 ## 🏗 Architecture
 
 ### Frontend Architecture
+
 ```
 src/
 ├── api/                 # HTTP client configuration
@@ -91,6 +97,7 @@ src/
 ```
 
 ### Backend Architecture
+
 ```
 backend/
 ├── config/             # Database configuration
@@ -104,11 +111,13 @@ backend/
 ## 🚀 Installation
 
 ### Prerequisites
+
 - Node.js 18+ and npm
 - MongoDB (local or Atlas)
 - Git
 
 ### Quick Start
+
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/blood-management-system.git
@@ -131,6 +140,7 @@ npm run dev        # Backend (http://localhost:3001)
 ## 🔧 Environment Variables
 
 ### Backend (.env)
+
 ```env
 NODE_ENV=development
 PORT=3001
@@ -140,6 +150,7 @@ JWT_EXPIRE=7d
 ```
 
 ### Frontend (.env)
+
 ```env
 VITE_API_URL=http://localhost:3001/api
 VITE_APP_NAME=Blood Bank Management System
@@ -149,6 +160,7 @@ VITE_APP_VERSION=1.0.0
 ## 📚 API Documentation
 
 ### Authentication Endpoints
+
 ```
 POST /api/auth/register    # User registration
 POST /api/auth/login       # User login
@@ -157,6 +169,7 @@ PUT  /api/auth/profile     # Update profile
 ```
 
 ### Donor Management
+
 ```
 GET    /api/donors         # Get all donors
 POST   /api/donors         # Create donor
@@ -166,6 +179,7 @@ DELETE /api/donors/:id     # Delete donor
 ```
 
 ### Blood Inventory
+
 ```
 GET    /api/blood          # Get blood inventory
 POST   /api/blood          # Add blood stock
@@ -174,6 +188,7 @@ DELETE /api/blood/:id      # Remove stock
 ```
 
 ### Blood Requests
+
 ```
 GET    /api/requests       # Get all requests
 POST   /api/requests       # Create request
@@ -183,6 +198,7 @@ PUT    /api/requests/:id   # Update request status
 ## 🎨 UI/UX Design
 
 ### Design System
+
 - **Color Palette**: Medical theme with blood red, medical blue, life green
 - **Typography**: Inter font family with consistent sizing scale
 - **Spacing**: 8px grid system with CSS custom properties
@@ -190,6 +206,7 @@ PUT    /api/requests/:id   # Update request status
 - **Animations**: Smooth transitions, hover effects, loading states
 
 ### Responsive Breakpoints
+
 ```css
 Mobile:  < 768px
 Tablet:  768px - 1024px
@@ -199,6 +216,7 @@ Desktop: > 1024px
 ## 🗄 Database Schema
 
 ### User Model
+
 ```javascript
 {
   name: String (required),
@@ -211,6 +229,7 @@ Desktop: > 1024px
 ```
 
 ### Donor Model
+
 ```javascript
 {
   name: String (required),
@@ -226,6 +245,7 @@ Desktop: > 1024px
 ```
 
 ### Blood Request Model
+
 ```javascript
 {
   requester: ObjectId (ref: 'User'),
@@ -242,6 +262,7 @@ Desktop: > 1024px
 ## 🔒 Security
 
 ### Implemented Security Measures
+
 - **Authentication**: JWT tokens with secure HTTP-only cookies
 - **Authorization**: Role-based access control (RBAC)
 - **Input Validation**: Server-side validation with sanitization
@@ -252,6 +273,7 @@ Desktop: > 1024px
 - **Environment Variables**: Sensitive data protection
 
 ### Security Best Practices
+
 - No sensitive data in client-side code
 - Secure token storage and transmission
 - Input sanitization and validation
@@ -261,6 +283,7 @@ Desktop: > 1024px
 ## 🧪 Testing
 
 ### Frontend Testing
+
 ```bash
 npm run test           # Run unit tests
 npm run test:coverage  # Coverage report
@@ -268,6 +291,7 @@ npm run test:e2e       # End-to-end tests
 ```
 
 ### Backend Testing
+
 ```bash
 npm run test           # Run API tests
 npm run test:unit      # Unit tests
@@ -277,18 +301,21 @@ npm run test:integration # Integration tests
 ## 🚀 Deployment
 
 ### Frontend (Netlify)
+
 ```bash
 npm run build
 # Deploy dist/ folder to Netlify
 ```
 
 ### Backend (Heroku/Railway)
+
 ```bash
 # Set environment variables
 # Deploy with Git push or CLI
 ```
 
 ### Environment-Specific Configurations
+
 - **Development**: Local MongoDB, detailed logging
 - **Staging**: Cloud database, error tracking
 - **Production**: Optimized builds, monitoring, CDN
@@ -304,6 +331,7 @@ npm run build
 ## 🤝 Contributing
 
 ### Development Workflow
+
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit changes (`git commit -m 'Add amazing feature'`)
@@ -311,6 +339,7 @@ npm run build
 5. Open Pull Request
 
 ### Code Standards
+
 - Follow ESLint configuration
 - Use Prettier for formatting
 - Write meaningful commit messages
