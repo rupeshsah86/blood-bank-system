@@ -1,0 +1,85 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius-full);
+  white-space: nowrap;
+}
+
+/* Sizes */
+.badge-sm {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--text-xs);
+}
+
+.badge-md {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--text-sm);
+}
+
+.badge-lg {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--text-base);
+}
+
+/* Variants */
+.badge-default {
+  background: var(--gray-100);
+  color: var(--gray-800);
+}
+
+.badge-primary {
+  background: var(--medical-blue-100);
+  color: var(--medical-blue-800);
+}
+
+.badge-success {
+  background: var(--life-green-100);
+  color: var(--life-green-800);
+}
+
+.badge-danger {
+  background: var(--blood-red-100);
+  color: var(--blood-red-800);
+}
+
+.badge-warning {
+  background: var(--warning-100);
+  color: var(--warning-800);
+}
+
+.badge-info {
+  background: var(--info-100);
+  color: var(--info-800);
+}
+
+/* Blood type badges */
+.badge-blood {
+  font-weight: var(--font-weight-bold);
+  min-width: 40px;
+}
+
+.badge-blood.A-pos,
+.badge-blood.A-neg {
+  background: var(--blood-red-100);
+  color: var(--blood-red-800);
+}
+
+.badge-blood.B-pos,
+.badge-blood.B-neg {
+  background: var(--medical-blue-100);
+  color: var(--medical-blue-800);
+}
+
+.badge-blood.AB-pos,
+.badge-blood.AB-neg {
+  background: var(--purple-100);
+  color: var(--purple-800);
+}
+
+.badge-blood.O-pos,
+.badge-blood.O-neg {
+  background: var(--life-green-100);
+  color: var(--life-green-800);
+}

@@ -2,29 +2,41 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authService } from './authService';
 import Loader from '../../components/Loader';
+import FormField from '../../components/FormField';
+import { useFormValidation, validators } from '../../utils/validation';
+import { showToast } from '../../components/ToastContainer';
 import './Auth.css';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const initialValues = { email: '', password: '' };
+  const validationRules = {
+    email: [validators.required, validators.email],
+    password: [validators.required, validators.minLength(6)]
+  };
+
+  const { values, errors, handleChange, handleBlur, validateAll } = useFormValidation(initialValues, validationRules);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError('');
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateAll()) {
+      showToast.error('Please fix the errors in the form');
+      return;
+    }
+
     setLoading(true);
-    setError('');
 
     try {
-      await authService.login(formData);
+      await authService.login(values);
+      showToast.success('Login successful!');
       navigate('/dashboard');
     } catch (error) {
-      setError(error.response?.data?.message || 'Login failed');
+      const errorMsg = error.response?.data?.message || 'Login failed';
+      showToast.error(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -40,34 +52,30 @@ const Login = () => {
               <p>Sign in to your account</p>
             </div>
 
-            {error && <div className="error-message">{error}</div>}
-
             <form onSubmit={handleSubmit} className="auth-form">
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your email"
-                />
-              </div>
+              <FormField
+                label="Email Address"
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.email}
+                required
+                placeholder="Enter your email"
+              />
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  placeholder="Enter your password"
-                />
-              </div>
+              <FormField
+                label="Password"
+                type="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password}
+                required
+                placeholder="Enter your password"
+              />
 
               <button type="submit" className="btn btn-primary auth-btn" disabled={loading}>
                 {loading ? <Loader /> : 'Sign In'}

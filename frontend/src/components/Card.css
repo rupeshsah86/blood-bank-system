@@ -1,0 +1,71 @@
+.card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--gray-200);
+  transition: var(--transition-base);
+}
+
+/* Variants */
+.card-default {
+  background: var(--white);
+}
+
+.card-primary {
+  background: var(--medical-blue-50);
+  border-color: var(--medical-blue-200);
+}
+
+.card-success {
+  background: var(--life-green-50);
+  border-color: var(--life-green-200);
+}
+
+.card-danger {
+  background: var(--blood-red-50);
+  border-color: var(--blood-red-200);
+}
+
+.card-warning {
+  background: var(--warning-50);
+  border-color: var(--warning-200);
+}
+
+/* Padding */
+.card-padding-sm {
+  padding: var(--spacing-3);
+}
+
+.card-padding-md {
+  padding: var(--spacing-4);
+}
+
+.card-padding-lg {
+  padding: var(--spacing-6);
+}
+
+.card-padding-xl {
+  padding: var(--spacing-8);
+}
+
+/* Shadow */
+.card-shadow-none {
+  box-shadow: none;
+}
+
+.card-shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.card-shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.card-shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Hover effect */
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}

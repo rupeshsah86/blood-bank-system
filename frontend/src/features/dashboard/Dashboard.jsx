@@ -7,6 +7,8 @@ import AddDonor from '../donor/AddDonor';
 import DonorList from '../donor/DonorList';
 import BloodStock from '../blood/BloodStock';
 import BloodRequests from '../requests/BloodRequests';
+import UserProfile from '../profile/UserProfile';
+import Analytics from '../analytics/Analytics';
 import Loader from '../../components/Loader';
 import './Dashboard.css';
 
@@ -91,6 +93,14 @@ const Dashboard = () => {
           >
             Blood Stock
           </button>
+          {user?.role === 'admin' && (
+            <button 
+              className={`tab ${activeTab === 'analytics' ? 'active' : ''}`}
+              onClick={() => setActiveTab('analytics')}
+            >
+              Analytics
+            </button>
+          )}
           {(user?.role === 'admin' || user?.role === 'hospital') && (
             <button 
               className={`tab ${activeTab === 'requests' ? 'active' : ''}`}
@@ -99,6 +109,12 @@ const Dashboard = () => {
               Requests
             </button>
           )}
+          <button 
+            className={`tab ${activeTab === 'profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('profile')}
+          >
+            Profile
+          </button>
         </div>
 
         <div className="dashboard-content">
@@ -171,6 +187,14 @@ const Dashboard = () => {
                   >
                     Blood Requests
                   </button>
+                  {user?.role === 'admin' && (
+                    <button 
+                      className="action-btn"
+                      onClick={() => setActiveTab('analytics')}
+                    >
+                      View Analytics
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -189,6 +213,14 @@ const Dashboard = () => {
 
           {activeTab === 'requests' && (
             <BloodRequests userRole={user?.role} onRequestUpdated={loadDashboardData} />
+          )}
+
+          {activeTab === 'profile' && (
+            <UserProfile />
+          )}
+
+          {activeTab === 'analytics' && user?.role === 'admin' && (
+            <Analytics />
           )}
         </div>
       </div>

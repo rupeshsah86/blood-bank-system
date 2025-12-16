@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { bloodService } from '../blood/bloodService';
 import { authService } from '../auth/authService';
 import Loader from '../../components/Loader';
+import FormField from '../../components/FormField';
+import { useFormValidation, validators } from '../../utils/validation';
+import { showToast } from '../../components/ToastContainer';
 import './BloodRequests.css';
 
 const BloodRequests = ({ userRole }) => {
@@ -9,15 +12,35 @@ const BloodRequests = ({ userRole }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [formData, setFormData] = useState({
+  
+  const initialFormValues = {
     bloodGroup: '',
     quantity: '',
     urgency: 'medium',
     hospital: '',
     patientName: ''
-  });
+  };
 
-  const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  const formValidationRules = {
+    bloodGroup: [validators.required, validators.bloodType],
+    quantity: [validators.required],
+    urgency: [validators.required],
+    hospital: [validators.required, validators.minLength(2)],
+    patientName: [validators.required, validators.minLength(2)]
+  };
+
+  const { values: formData, errors: formErrors, handleChange: handleFormChange, handleBlur: handleFormBlur, validateAll: validateForm, reset: resetForm } = useFormValidation(initialFormValues, formValidationRules);
+
+  const bloodGroups = [
+    { value: 'A+', label: 'A+' },
+    { value: 'A-', label: 'A-' },
+    { value: 'B+', label: 'B+' },
+    { value: 'B-', label: 'B-' },
+    { value: 'AB+', label: 'AB+' },
+    { value: 'AB-', label: 'AB-' },
+    { value: 'O+', label: 'O+' },
+    { value: 'O-', label: 'O-' }
+  ];
   const urgencyLevels = [
     { value: 'low', label: 'Low', color: '#059669' },
     { value: 'medium', label: 'Medium', color: '#d97706' },
@@ -60,22 +83,25 @@ const BloodRequests = ({ userRole }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      showToast.error('Please fix the errors in the form');
+      return;
+    }
+
     setLoading(true);
     setError('');
 
     try {
       await bloodService.createBloodRequest(formData);
-      setFormData({
-        bloodGroup: '',
-        quantity: '',
-        urgency: 'medium',
-        hospital: '',
-        patientName: ''
-      });
+      showToast.success('Blood request created successfully!');
+      resetForm();
       setShowCreateForm(false);
       loadRequests();
     } catch (error) {
-      setError(error.response?.data?.message || 'Failed to create request');
+      const errorMsg = error.response?.data?.message || 'Failed to create request';
+      setError(errorMsg);
+      showToast.error(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -146,69 +172,70 @@ const BloodRequests = ({ userRole }) => {
           <h3>Create Blood Request</h3>
           <form onSubmit={handleSubmit}>
             <div className="form-row">
-              <div className="form-group">
-                <label>Blood Group Needed</label>
-                <select
-                  value={formData.bloodGroup}
-                  onChange={(e) => setFormData({...formData, bloodGroup: e.target.value})}
-                  required
-                >
-                  <option value="">Select blood group</option>
-                  {bloodGroups.map(group => (
-                    <option key={group} value={group}>{group}</option>
-                  ))}
-                </select>
-              </div>
+              <FormField
+                label="Blood Group Needed"
+                type="select"
+                name="bloodGroup"
+                value={formData.bloodGroup}
+                onChange={handleFormChange}
+                onBlur={handleFormBlur}
+                error={formErrors.bloodGroup}
+                required
+                options={bloodGroups}
+                className="form-group"
+              />
               
-              <div className="form-group">
-                <label>Quantity (units)</label>
-                <input
-                  type="number"
-                  value={formData.quantity}
-                  onChange={(e) => setFormData({...formData, quantity: e.target.value})}
-                  required
-                  min="1"
-                  placeholder="Number of units needed"
-                />
-              </div>
+              <FormField
+                label="Quantity (units)"
+                type="number"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleFormChange}
+                onBlur={handleFormBlur}
+                error={formErrors.quantity}
+                required
+                placeholder="Number of units needed"
+                className="form-group"
+              />
             </div>
             
             <div className="form-row">
-              <div className="form-group">
-                <label>Urgency Level</label>
-                <select
-                  value={formData.urgency}
-                  onChange={(e) => setFormData({...formData, urgency: e.target.value})}
-                  required
-                >
-                  {urgencyLevels.map(level => (
-                    <option key={level.value} value={level.value}>{level.label}</option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label>Hospital/Medical Center</label>
-                <input
-                  type="text"
-                  value={formData.hospital}
-                  onChange={(e) => setFormData({...formData, hospital: e.target.value})}
-                  required
-                  placeholder="Hospital name"
-                />
-              </div>
-            </div>
-            
-            <div className="form-group">
-              <label>Patient Name</label>
-              <input
-                type="text"
-                value={formData.patientName}
-                onChange={(e) => setFormData({...formData, patientName: e.target.value})}
+              <FormField
+                label="Urgency Level"
+                type="select"
+                name="urgency"
+                value={formData.urgency}
+                onChange={handleFormChange}
+                onBlur={handleFormBlur}
+                error={formErrors.urgency}
                 required
-                placeholder="Patient's full name"
+                options={urgencyLevels}
+                className="form-group"
+              />
+              
+              <FormField
+                label="Hospital/Medical Center"
+                name="hospital"
+                value={formData.hospital}
+                onChange={handleFormChange}
+                onBlur={handleFormBlur}
+                error={formErrors.hospital}
+                required
+                placeholder="Hospital name"
+                className="form-group"
               />
             </div>
+            
+            <FormField
+              label="Patient Name"
+              name="patientName"
+              value={formData.patientName}
+              onChange={handleFormChange}
+              onBlur={handleFormBlur}
+              error={formErrors.patientName}
+              required
+              placeholder="Patient's full name"
+            />
             
             <button type="submit" className="btn btn-primary" disabled={loading}>
               {loading ? <Loader /> : 'Submit Request'}

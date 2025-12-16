@@ -1,0 +1,117 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-base);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.btn-sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--text-sm);
+}
+
+.btn-md {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--text-base);
+}
+
+.btn-lg {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: var(--text-lg);
+}
+
+/* Variants */
+.btn-primary {
+  background: var(--medical-blue-600);
+  color: var(--white);
+  border-color: var(--medical-blue-600);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--medical-blue-700);
+  border-color: var(--medical-blue-700);
+}
+
+.btn-secondary {
+  background: var(--gray-600);
+  color: var(--white);
+  border-color: var(--gray-600);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--gray-700);
+  border-color: var(--gray-700);
+}
+
+.btn-success {
+  background: var(--life-green-600);
+  color: var(--white);
+  border-color: var(--life-green-600);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: var(--life-green-700);
+  border-color: var(--life-green-700);
+}
+
+.btn-danger {
+  background: var(--blood-red-600);
+  color: var(--white);
+  border-color: var(--blood-red-600);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--blood-red-700);
+  border-color: var(--blood-red-700);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--medical-blue-600);
+  border-color: var(--medical-blue-600);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--medical-blue-600);
+  color: var(--white);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--gray-600);
+  border-color: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--gray-100);
+  color: var(--gray-900);
+}
+
+/* Loading state */
+.btn-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.btn-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

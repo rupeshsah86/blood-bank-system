@@ -5,6 +5,14 @@
   height: 200px;
 }
 
+.loader-sm {
+  height: 100px;
+}
+
+.loader-lg {
+  height: 300px;
+}
+
 .loader {
   position: relative;
   width: 40px;
@@ -20,6 +28,21 @@
   animation: pulse 1.5s ease-in-out infinite;
 }
 
+.inline-loader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--gray-200);
+  border-top: 2px solid var(--blood-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
 @keyframes pulse {
   0%, 100% {
     transform: rotate(-45deg) scale(1);
@@ -29,4 +52,9 @@
     transform: rotate(-45deg) scale(1.1);
     opacity: 0.8;
   }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

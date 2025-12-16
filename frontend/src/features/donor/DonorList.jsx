@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { donorService } from './donorService';
 import { authService } from '../auth/authService';
-import Loader from '../../components/Loader';
+import SkeletonLoader from '../../components/SkeletonLoader';
+import EmptyState from '../../components/EmptyState';
+import NetworkError from '../../components/NetworkError';
+import { showToast } from '../../components/ToastContainer';
 import './Donor.css';
 
 const DonorList = () => {
@@ -62,7 +65,11 @@ const DonorList = () => {
   if (loading) {
     return (
       <div className="donor-list">
-        <Loader />
+        <div className="section-header">
+          <h2>Donor Directory</h2>
+          <p>Manage and view all registered donors</p>
+        </div>
+        <SkeletonLoader variant="card" count={6} />
       </div>
     );
   }
@@ -79,7 +86,9 @@ const DonorList = () => {
         )}
       </div>
 
-      {error && (
+      {error && error.includes('connect') ? (
+        <NetworkError onRetry={loadDonors} error={{ code: 'ERR_NETWORK' }} />
+      ) : error ? (
         <div className="error-message">
           {error}
           <button 
@@ -90,22 +99,28 @@ const DonorList = () => {
             Retry
           </button>
         </div>
-      )}
+      ) : null}
 
-      <div className="filters">
+      <div className="filters" role="search" aria-label="Filter donors">
         <div className="search-box">
+          <label htmlFor="donor-search" className="sr-only">Search donors</label>
           <input
+            id="donor-search"
             type="text"
             placeholder="Search donors by name, email, or city..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search donors by name, email, or city"
           />
         </div>
         
         <div className="filter-group">
+          <label htmlFor="blood-group-filter" className="sr-only">Filter by blood group</label>
           <select
+            id="blood-group-filter"
             value={filterBloodGroup}
             onChange={(e) => setFilterBloodGroup(e.target.value)}
+            aria-label="Filter donors by blood group"
           >
             <option value="">All Blood Groups</option>
             {bloodGroups.map(group => (
@@ -115,33 +130,50 @@ const DonorList = () => {
         </div>
       </div>
 
-      <div className="donors-grid">
+      <div className="donors-grid grid grid-cols-3">
         {donors.length === 0 && !error ? (
-          <div className="no-donors">
-            <p>No donors registered yet.</p>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-500)', marginTop: '8px' }}>
-              Add donors using the "Add New Donor" section above.
-            </p>
-          </div>
+          <EmptyState
+            variant="no-data"
+            title="No Donors Registered"
+            description="Start building your donor database by adding new donors to the system."
+            action={
+              <button className="btn btn-primary" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                Add First Donor
+              </button>
+            }
+          />
         ) : filteredDonors.length === 0 && donors.length > 0 ? (
-          <div className="no-donors">
-            <p>No donors found matching your search criteria.</p>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-500)', marginTop: '8px' }}>
-              Try adjusting your search terms or blood group filter.
-            </p>
-          </div>
+          <EmptyState
+            variant="search"
+            title="No Matching Donors"
+            description="No donors found matching your search criteria. Try adjusting your filters."
+            action={
+              <button className="btn btn-outline" onClick={() => { setSearchTerm(''); setFilterBloodGroup(''); }}>
+                Clear Filters
+              </button>
+            }
+          />
         ) : (
           filteredDonors.map(donor => (
-            <div key={donor._id} className="donor-card">
+            <div 
+              key={donor._id} 
+              className="donor-card"
+              tabIndex="0"
+              role="article"
+              aria-label={`Donor ${donor.name}, blood type ${donor.bloodGroup}, located in ${donor.city}`}
+            >
               <div className="donor-header">
                 <h3>{donor.name}</h3>
-                <span className={`blood-badge ${donor.bloodGroup.replace('+', 'pos').replace('-', 'neg')}`}>
+                <span 
+                  className={`blood-badge ${donor.bloodGroup.replace('+', 'pos').replace('-', 'neg')}`}
+                  aria-label={`Blood type ${donor.bloodGroup}`}
+                >
                   {donor.bloodGroup}
                 </span>
               </div>
               <div className="donor-info">
-                <p><strong>Email:</strong> {donor.email}</p>
-                <p><strong>Phone:</strong> {donor.phone}</p>
+                <p><strong>Email:</strong> <span aria-label={`Email address ${donor.email}`}>{donor.email}</span></p>
+                <p><strong>Phone:</strong> <span aria-label={`Phone number ${donor.phone}`}>{donor.phone}</span></p>
                 <p><strong>City:</strong> {donor.city}</p>
                 <p><strong>Age:</strong> {donor.age} years</p>
               </div>

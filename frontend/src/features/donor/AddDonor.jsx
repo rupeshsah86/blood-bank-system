@@ -1,48 +1,64 @@
 import { useState } from 'react';
 import { donorService } from './donorService';
 import Loader from '../../components/Loader';
+import FormField from '../../components/FormField';
+import { showToast } from '../../components/ToastContainer';
+import { useFormValidation, validators } from '../../utils/validation';
 import './Donor.css';
 
 const AddDonor = ({ onDonorAdded }) => {
-  const [formData, setFormData] = useState({
+  const initialValues = {
     name: '',
     email: '',
     phone: '',
     bloodGroup: '',
     city: '',
     age: ''
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
-  const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError('');
-    setSuccess('');
   };
+
+  const validationRules = {
+    name: [validators.required, validators.minLength(2)],
+    email: [validators.required, validators.email],
+    phone: [validators.required, validators.phone],
+    bloodGroup: [validators.required, validators.bloodType],
+    city: [validators.required, validators.minLength(2)],
+    age: [validators.required, validators.age]
+  };
+
+  const { values, errors, handleChange, handleBlur, validateAll, reset } = useFormValidation(initialValues, validationRules);
+  const [loading, setLoading] = useState(false);
+
+  const bloodGroups = [
+    { value: 'A+', label: 'A+' },
+    { value: 'A-', label: 'A-' },
+    { value: 'B+', label: 'B+' },
+    { value: 'B-', label: 'B-' },
+    { value: 'AB+', label: 'AB+' },
+    { value: 'AB-', label: 'AB-' },
+    { value: 'O+', label: 'O+' },
+    { value: 'O-', label: 'O-' }
+  ];
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateAll()) {
+      showToast.error('Please fix the errors in the form');
+      return;
+    }
+
     setLoading(true);
-    setError('');
 
     try {
-      await donorService.addDonor(formData);
-      setSuccess('Donor added successfully!');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        bloodGroup: '',
-        city: '',
-        age: ''
-      });
+      await donorService.addDonor(values);
+      showToast.success('Donor added successfully!');
+      reset();
       if (onDonorAdded) onDonorAdded();
     } catch (error) {
-      setError(error.response?.data?.message || 'Failed to add donor');
+      const errorMsg = error.response?.data?.message || 'Failed to add donor';
+      showToast.error(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -55,97 +71,87 @@ const AddDonor = ({ onDonorAdded }) => {
         <p>Register a new blood donor in the system</p>
       </div>
 
-      {error && <div className="error-message">{error}</div>}
-      {success && <div className="success-message">{success}</div>}
-
       <form onSubmit={handleSubmit} className="donor-form">
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="Enter full name"
-            />
-          </div>
+        <div className="form-row flex-responsive">
+          <FormField
+            label="Full Name"
+            name="name"
+            value={values.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.name}
+            required
+            placeholder="Enter full name"
+            className="form-group"
+          />
           
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="Enter email address"
-            />
-          </div>
+          <FormField
+            label="Email"
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.email}
+            required
+            placeholder="Enter email address"
+            className="form-group"
+          />
         </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              placeholder="Enter phone number"
-            />
-          </div>
+        <div className="form-row flex-responsive">
+          <FormField
+            label="Phone Number"
+            type="tel"
+            name="phone"
+            value={values.phone}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.phone}
+            required
+            placeholder="Enter phone number"
+            className="form-group"
+          />
           
-          <div className="form-group">
-            <label htmlFor="bloodGroup">Blood Group</label>
-            <select
-              id="bloodGroup"
-              name="bloodGroup"
-              value={formData.bloodGroup}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select blood group</option>
-              {bloodGroups.map(group => (
-                <option key={group} value={group}>{group}</option>
-              ))}
-            </select>
-          </div>
+          <FormField
+            label="Blood Group"
+            type="select"
+            name="bloodGroup"
+            value={values.bloodGroup}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.bloodGroup}
+            required
+            options={bloodGroups}
+            className="form-group"
+          />
         </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="city">City</label>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              required
-              placeholder="Enter city"
-            />
-          </div>
+        <div className="form-row flex-responsive">
+          <FormField
+            label="City"
+            name="city"
+            value={values.city}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.city}
+            required
+            placeholder="Enter city"
+            className="form-group"
+          />
           
-          <div className="form-group">
-            <label htmlFor="age">Age</label>
-            <input
-              type="number"
-              id="age"
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              required
-              min="18"
-              max="65"
-              placeholder="Enter age"
-            />
-          </div>
+          <FormField
+            label="Age"
+            type="number"
+            name="age"
+            value={values.age}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.age}
+            required
+            placeholder="Enter age (18-65)"
+            className="form-group"
+          />
         </div>
 
         <button type="submit" className="btn btn-primary" disabled={loading}>
