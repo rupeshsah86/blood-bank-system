@@ -7,6 +7,8 @@ import AddDonor from '../donor/AddDonor';
 import DonorList from '../donor/DonorList';
 import BloodStock from '../blood/BloodStock';
 import BloodRequests from '../requests/BloodRequests';
+import UserBloodRequest from '../requests/UserBloodRequest';
+import HospitalRequests from '../requests/HospitalRequests';
 import UserProfile from '../profile/UserProfile';
 import Analytics from '../analytics/Analytics';
 import Loader from '../../components/Loader';
@@ -119,12 +121,28 @@ const Dashboard = () => {
               Analytics
             </button>
           )}
-          {(user?.role === 'admin' || user?.role === 'hospital') && (
+          {user?.role === 'donor' && (
+            <button 
+              className={`tab ${activeTab === 'my-requests' ? 'active' : ''}`}
+              onClick={() => setActiveTab('my-requests')}
+            >
+              My Requests
+            </button>
+          )}
+          {user?.role === 'hospital' && (
+            <button 
+              className={`tab ${activeTab === 'hospital-requests' ? 'active' : ''}`}
+              onClick={() => setActiveTab('hospital-requests')}
+            >
+              Patient Requests
+            </button>
+          )}
+          {user?.role === 'admin' && (
             <button 
               className={`tab ${activeTab === 'requests' ? 'active' : ''}`}
               onClick={() => setActiveTab('requests')}
             >
-              Requests
+              Manage All Requests
             </button>
           )}
           <button 
@@ -211,12 +229,30 @@ const Dashboard = () => {
                       Manage Blood Stock
                     </button>
                   )}
-                  <button 
-                    className="action-btn"
-                    onClick={() => setActiveTab('requests')}
-                  >
-                    Blood Requests
-                  </button>
+                  {user?.role === 'donor' && (
+                    <button 
+                      className="action-btn"
+                      onClick={() => setActiveTab('my-requests')}
+                    >
+                      Request Blood
+                    </button>
+                  )}
+                  {user?.role === 'hospital' && (
+                    <button 
+                      className="action-btn"
+                      onClick={() => setActiveTab('hospital-requests')}
+                    >
+                      Patient Requests
+                    </button>
+                  )}
+                  {user?.role === 'admin' && (
+                    <button 
+                      className="action-btn"
+                      onClick={() => setActiveTab('requests')}
+                    >
+                      Manage All Requests
+                    </button>
+                  )}
                   {user?.role === 'admin' && (
                     <button 
                       className="action-btn"
@@ -241,7 +277,15 @@ const Dashboard = () => {
             <BloodStock userRole={user?.role} onStockUpdated={loadDashboardData} />
           )}
 
-          {activeTab === 'requests' && (
+          {activeTab === 'my-requests' && user?.role === 'donor' && (
+            <UserBloodRequest />
+          )}
+
+          {activeTab === 'hospital-requests' && user?.role === 'hospital' && (
+            <HospitalRequests />
+          )}
+
+          {activeTab === 'requests' && user?.role === 'admin' && (
             <BloodRequests userRole={user?.role} onRequestUpdated={loadDashboardData} />
           )}
 
