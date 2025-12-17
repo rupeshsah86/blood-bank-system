@@ -59,7 +59,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3>Address</h3>
-                <p>123 Medical Center Drive<br/>Healthcare District, City 12345</p>
+                <p>Medical Center Drive<br/>Healthcare Nepal, Malangwa 45800</p>
               </div>
             </div>
 
@@ -71,7 +71,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3>Phone</h3>
-                <p>Emergency: 911<br/>General: (555) 123-4567</p>
+                <p>Emergency: 911<br/>General: +9779840135047</p>
               </div>
             </div>
 
@@ -83,7 +83,7 @@ const Contact = () => {
               </div>
               <div>
                 <h3>Email</h3>
-                <p>info@bloodbank.com<br/>emergency@bloodbank.com</p>
+                <p>rupesh@bloodbank.com<br/>emergency@bloodbank.com</p>
               </div>
             </div>
 
