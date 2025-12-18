@@ -29,5 +29,10 @@ export const bloodService = {
   updateRequestStatus: async (id, status) => {
     const response = await api.put(`/requests/${id}`, { status });
     return response.data;
+  },
+
+  getUserRequests: async () => {
+    const response = await api.get('/requests/my');
+    return response.data;
   }
 };

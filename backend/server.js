@@ -16,7 +16,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? true  // Allow same origin requests through Nginx
+    : ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
@@ -25,8 +31,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bloodbank', bloodBankRoutes);
 app.use('/api/requests', bloodRequestRoutes);
 
-// Test route
+// Test routes
 app.get('/', (req, res) => {
+  res.json({ message: 'Blood Bank Management System API is running!' });
+});
+
+app.get('/api', (req, res) => {
   res.json({ message: 'Blood Bank Management System API is running!' });
 });
 

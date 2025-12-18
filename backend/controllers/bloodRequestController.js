@@ -13,10 +13,19 @@ const createBloodRequest = async (req, res) => {
   }
 };
 
-// Get all blood requests
+// Get blood requests
 const getBloodRequests = async (req, res) => {
   try {
-    const requests = await BloodRequest.find().populate('requester', 'name email');
+    let requests;
+    
+    // Admin and hospital can see all requests
+    if (req.user.role === 'admin' || req.user.role === 'hospital') {
+      requests = await BloodRequest.find().populate('requester', 'name email');
+    } else {
+      // Donors can only see their own requests
+      requests = await BloodRequest.find({ requester: req.user._id }).populate('requester', 'name email');
+    }
+    
     res.json({ success: true, data: requests });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -40,4 +49,14 @@ const updateRequestStatus = async (req, res) => {
   }
 };
 
-module.exports = { createBloodRequest, getBloodRequests, updateRequestStatus };
+// Get user's own requests
+const getUserRequests = async (req, res) => {
+  try {
+    const requests = await BloodRequest.find({ requester: req.user._id }).populate('requester', 'name email');
+    res.json({ success: true, data: requests });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+module.exports = { createBloodRequest, getBloodRequests, updateRequestStatus, getUserRequests };

@@ -55,7 +55,12 @@ const BloodRequests = ({ userRole }) => {
   const loadRequests = async () => {
     try {
       setError('');
-      const response = await bloodService.getBloodRequests();
+      const user = authService.getCurrentUser();
+      
+      // Use appropriate endpoint based on user role
+      const response = (user?.role === 'admin' || user?.role === 'hospital') 
+        ? await bloodService.getBloodRequests()
+        : await bloodService.getUserRequests();
       
       if (response && response.success && response.data) {
         setRequests(response.data);
@@ -143,8 +148,8 @@ const BloodRequests = ({ userRole }) => {
     <div className="blood-requests">
       <div className="section-header">
         <div>
-          <h2>Blood Requests</h2>
-          <p>Manage blood requests and emergency needs</p>
+          <h2>{userRole === 'donor' ? 'My Blood Requests' : 'Blood Requests'}</h2>
+          <p>{userRole === 'donor' ? 'View your blood request history' : 'Manage blood requests and emergency needs'}</p>
         </div>
         <button 
           className="btn btn-primary"

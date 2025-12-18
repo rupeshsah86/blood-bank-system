@@ -59,16 +59,9 @@ const UserBloodRequest = () => {
   const loadUserRequests = async () => {
     try {
       setError('');
-      const response = await bloodService.getBloodRequests();
-      const allRequests = response?.success ? response.data : (Array.isArray(response) ? response : []);
-      
-      // Filter requests for current user
-      const user = authService.getCurrentUser();
-      const filteredRequests = allRequests.filter(request => 
-        request.requester?._id === user?.id || request.requester === user?.id
-      );
-      
-      setUserRequests(filteredRequests);
+      const response = await bloodService.getUserRequests();
+      const requests = response?.success ? response.data : (Array.isArray(response) ? response : []);
+      setUserRequests(requests);
     } catch (error) {
       console.error('Error loading user requests:', error);
       setError('Failed to load your requests');
